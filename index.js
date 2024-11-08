@@ -59,16 +59,20 @@ window.addEventListener('keydown', function(e) {
     //console.log("keydown: " + whichKey(e));
 
     const userInputDiv = document.getElementById('user-input');
-
+    const test = "";
     if (whichKey(e) === "Space") {
         userInputDiv.textContent += " "; // Add a space
+        test += " ";
     } else if (whichKey(e) === "Backspace") {
         let currentText = userInputDiv.textContent;
         userInputDiv.textContent = currentText.slice(0, -1); // Remove the last character
+        test = test.slice(0,-1);
     } else if (whichKey(e).length === 1) {  // Ignore special keys and handle normal characters
         userInputDiv.textContent += whichKey(e);
+        test += whichKey(e);
     }
 
     checkCorrect();
+    console.log(test);
 }, false);
 
