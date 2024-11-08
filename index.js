@@ -33,6 +33,21 @@ function whichKey(e) {
 }
 
 
+function checkCorrect(){
+    let input = document.getElementById('user-input').textContent;
+    let text = document.getElementById('target-text').textContent;
+    let current_length = input.length;
+
+    for (let i = 0; i < current_length; i++){
+        if(input[i] != text[i]){
+            console.log("Wrong at possition: " + i);
+        }
+    }
+    
+}
+
+
+
 window.addEventListener('keydown', function(e) {
     //console.log("keydown: " + whichKey(e));
 
@@ -46,4 +61,7 @@ window.addEventListener('keydown', function(e) {
     } else if (whichKey(e).length === 1) {  // Ignore special keys and handle normal characters
         userInputDiv.textContent += whichKey(e);
     }
+
+    checkCorrect();
 }, false);
+
