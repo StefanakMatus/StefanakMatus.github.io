@@ -46,7 +46,7 @@ function checkCorrect(){
             output += `<span style="color: red">${input[i]}</span>`;
         } else {
             // If the character is correct, simply add it to the output
-            output += input[i];
+            output += `<span style="color: green">${input[i]}</span>`;
         }
     }
     
