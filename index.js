@@ -35,38 +35,50 @@ function whichKey(e) {
 }
 
 function checkCorrect(input) {
-    const text = document.getElementById('target-text').textContent;
+    let text = document.getElementById('target-text').textContent;
     let current_length = input.length;
+    let counter = 0;
     let output = "";
+
+    console.log(text.length);
 
     // Compare input with the target text character by character
     for (let i = 0; i < current_length; i++) {
-        if (input[i] !== text[i]) {
-            output += `<span style="color: red">${input[i]}</span>`;  // Incorrect character in red
+        if (input[i] == text[i]) {
+            output += `<span style="color: green">${text[i]}</span>`;  // Correct character in green
+            counter++;
         } else {
-            output += `<span style="color: green">${input[i]}</span>`;  // Correct character in green
+            output += `<span style="color: red">${text[i]}</span>`;  // Incorrect character in red
         }
     }
 
-    // Append the remaining text in the target text that the user has not typed yet
-    output += text.slice(current_length);  // Append remaining characters in original color
+    if(counter === text.length){
+        console.log("enderino");
+        // Load the next sentence here
+        let newSentence = "This is the next sentence to type."; // Replace with your desired sentence
+        document.getElementById('target-text').textContent = newSentence;
+
+        // Clear the user input
+        userInputText = "";
+        return;
+    }
+    // Add the remaining untyped text from the target text in the original color
+    if (current_length < text.length) {
+        output += text.slice(current_length); 
+    }
 
     // Update the target text div with color-coded feedback
     document.getElementById('target-text').innerHTML = output;
 }
 
 window.addEventListener('keydown', function(e) {
-    // Handle Space, Backspace, and normal characters
-    const key = whichKey(e);
-    
-    if (key === "Space") {
+    if (whichKey(e) === "Space") {
         userInputText += " "; // Add a space
-    } else if (key === "Backspace") {
+    } else if (whichKey(e) === "Backspace") {
         userInputText = userInputText.slice(0, -1); // Remove the last character
-    } else if (key.length === 1) {  // Ignore special keys and handle normal characters
-        userInputText += key;
+    } else if (whichKey(e).length === 1) {  // Ignore special keys and handle normal characters
+        userInputText += whichKey(e);
     }
 
-    console.log(userInputText);
     checkCorrect(userInputText);
 }, false);
