@@ -8,7 +8,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    color: #ccc; /* Low visibility color */
+    color: #838383; /* Low visibility color */
     pointer-events: none; /* Prevents interaction with this text */
 }
 
@@ -16,7 +16,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    color: black; /* Visible text color */
+    color: rgb(255, 255, 255); /* Visible text color */
     z-index: 1; /* Ensures it appears above the target text */
 }
 
