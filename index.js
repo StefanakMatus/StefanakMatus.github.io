@@ -38,9 +38,14 @@ function checkCorrect(){
     let text = document.getElementById('target-text').textContent;
     let current_length = input.length;
 
-    for (let i = 0; i < current_length; i++){
-        if(input[i] != text[i]){
-            console.log("Wrong at possition: " + i);
+    for (let i = 0; i < current_length; i++) {
+        if (input[i] !== text[i]) {
+            console.log("Wrong at position: " + i);
+            // Wrap the incorrect character in a span and apply a red color
+            output += `<span style="color: red">${input[i]}</span>`;
+        } else {
+            // If the character is correct, simply add it to the output
+            output += input[i];
         }
     }
     
