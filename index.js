@@ -1,5 +1,6 @@
 function whichKey(e){
     let charCode = e.keyCode
+    console.log("Before: " + charCode);
     return String.fromCharCode(charCode); 
 }
 
