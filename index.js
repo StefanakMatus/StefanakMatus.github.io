@@ -37,6 +37,7 @@ function checkCorrect(){
     let input = document.getElementById('user-input').textContent;
     let text = document.getElementById('target-text').textContent;
     let current_length = input.length;
+    let output = "";
 
     for (let i = 0; i < current_length; i++) {
         if (input[i] !== text[i]) {
@@ -49,6 +50,8 @@ function checkCorrect(){
         }
     }
     
+    // Update the user input div with the new HTML content
+    document.getElementById('user-input').innerHTML = output;
 }
 
 
