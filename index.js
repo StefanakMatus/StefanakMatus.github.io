@@ -37,7 +37,7 @@ function whichKey(e) {
 
 
 function checkCorrect(){
-    let input = userInputText
+    let input = userInputText;
     let text = document.getElementById('target-text').textContent;
     let current_length = input.length;
     let output = "";
