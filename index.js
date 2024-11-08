@@ -43,15 +43,16 @@ function checkCorrect() {
     // Compare input with the target text character by character
     for (let i = 0; i < current_length; i++) {
         if (input[i] !== text[i]) {
-            output += `<span style="color: red">${text[i]}</span>`;  // Incorrect character in red
+            output += `<span style="color: red">${input[i]}</span>`;  // Incorrect character in red
         } else {
-            output += `<span style="color: green">${text[i]}</span>`;  // Correct character in green
+            output += `<span style="color: green">${input[i]}</span>`;  // Correct character in green
         }
     }
-    
-    // Update the target text div with color-coded feedback
-    document.getElementById('target-text').innerHTML = output;
+
+    // Get the target-text element and update only the parts you need
+    document.getElementById('target-text').innerHTML = output + text.slice(current_length);
 }
+
 
 window.addEventListener('keydown', function(e) {
     if (whichKey(e) === "Space") {
