@@ -20,6 +20,6 @@
     z-index: 1; /* Ensures it appears above the target text */
 }
 
-.body{
+body{
     background-color: black;
 }
