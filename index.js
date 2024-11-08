@@ -1,3 +1,6 @@
+let userInputText = "";
+
+
 function whichKey(e) {
     // Check if the key is a special key
     const specialKeys = {
@@ -34,7 +37,7 @@ function whichKey(e) {
 
 
 function checkCorrect(){
-    let input = document.getElementById('user-input').textContent;
+    let input = userInputText
     let text = document.getElementById('target-text').textContent;
     let current_length = input.length;
     let output = "";
@@ -42,37 +45,28 @@ function checkCorrect(){
     for (let i = 0; i < current_length; i++) {
         if (input[i] != text[i]) {
             console.log("Wrong at: " + i);
-            output += `<span style="color: red">${input[i]}</span>`;
+            output += `<span style="color: red">${text[i]}</span>`;
         } else {
             console.log("Correct at: " + i);
-            output += `<span style="color: green">${input[i]}</span>`;
+            output += `<span style="color: green">${text[i]}</span>`;
         }
     }
     
         // Update the user input div with the new HTML content
-    document.getElementById('user-input').innerHTML = output;
+    document.getElementById('target-text').innerHTML = output;
 }
 
 
 
 window.addEventListener('keydown', function(e) {
-    //console.log("keydown: " + whichKey(e));
-
-    const userInputDiv = document.getElementById('user-input');
-    const test = "";
     if (whichKey(e) === "Space") {
-        userInputDiv.textContent += " "; // Add a space
-        test += " ";
+        userInputText  += " "; // Add a space
     } else if (whichKey(e) === "Backspace") {
-        let currentText = userInputDiv.textContent;
-        userInputDiv.textContent = currentText.slice(0, -1); // Remove the last character
-        test = test.slice(0,-1);
+        userInputText = userInputText.slice(0, -1); // Remove the last character
     } else if (whichKey(e).length === 1) {  // Ignore special keys and handle normal characters
-        userInputDiv.textContent += whichKey(e);
-        test += whichKey(e);
+        userInputText += whichKey(e);
     }
 
     checkCorrect();
-    console.log(test);
 }, false);
 
