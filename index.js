@@ -38,7 +38,7 @@ function checkCorrect(input) {
     let text = document.getElementById('target-text').textContent;
     let current_length = input.length;
     let output = "";
-
+    console.log("Inside: " + input);
     // Compare input with the target text character by character
     for (let i = 0; i < current_length; i++) {
         if (input[i] !== text[i]) {
@@ -47,7 +47,7 @@ function checkCorrect(input) {
             output += `<span style="color: green">${text[i]}</span>`;  // Correct character in green
         }
     }
-    
+    console.log("test: " + output);
     // Update the target text div with color-coded feedback
     document.getElementById('target-text').innerHTML = output;
 }
