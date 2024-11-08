@@ -6,4 +6,5 @@ function whichKey(e){
 
 window.addEventListener('keypress',function(e){
     console.log("Pressed: " + whichKey(e));
+    document.getElementById('keyPressed').innerText = whichKey(e);
 },false)
