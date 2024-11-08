@@ -27,5 +27,12 @@ function whichKey(e){
 
 window.addEventListener('keydown',function(e){
     console.log("keydown: " + whichKey(e));
-    document.getElementById('keydown').innerText = whichKey(e);
+    if(whichKey(e) == "Space"){
+        document.getElementById('keydown').innerText += " ";
+    }else if(whichKey(e) == "Backspace"){
+        
+    }else{
+        document.getElementById('keydown').innerText += whichKey(e);
+    }
+    
 },false)
