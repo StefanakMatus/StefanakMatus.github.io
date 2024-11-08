@@ -41,8 +41,10 @@ function checkCorrect(){
 
     for (let i = 0; i < current_length; i++) {
         if (input[i] != text[i]) {
+            console.log("Wrong at: " + i);
             output += `<span class="wrong">${input[i]}</span>`;  // Incorrect characters
         } else {
+            console.log("Correct at: " + i);
             output += `<span class="correct">${input[i]}</span>`;  // Correct characters
         }
     }
