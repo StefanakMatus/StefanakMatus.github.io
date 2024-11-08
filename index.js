@@ -29,6 +29,7 @@ window.addEventListener('keydown',function(e){
     console.log("keydown: " + whichKey(e));
     if(whichKey(e) == "Space"){
         document.getElementById('keydown').innerText += " ";
+        console.log("Should put space");
     }else if(whichKey(e) == "Backspace"){
         
     }else{
