@@ -1,6 +1,6 @@
 function whichKey(e){
     let charCode = e.keyCode
-    console.log("Before: " + charCode);
+
     const specialKeys = {
         8: "Backspace",
         9: "Tab",
@@ -16,26 +16,24 @@ function whichKey(e){
         40: "Arrow Down"
     };
 
-    // Check if the key is in the specialKeys object
     if (specialKeys[charCode]) {
         return specialKeys[charCode];
     }
-
     return String.fromCharCode(charCode); 
 }
 
 
-window.addEventListener('keydown',function(e){
+window.addEventListener('keydown', function(e) {
     console.log("keydown: " + whichKey(e));
-    if(whichKey(e) == "Space"){
-        document.getElementById('keydown').textContent += " ";
-        console.log("Should put space");
-    }else if(whichKey(e) == "Backspace"){
-        let currentText = document.getElementById('keydown').textContent;
-        document.getElementById('keydown').textContent = currentText.slice(0, -1); // Remove last character
-        console.log("Backspace pressed, removed last character");
-    }else{
-        document.getElementById('keydown').textContent += whichKey(e);
+
+    const userInputDiv = document.getElementById('user-input');
+
+    if (whichKey(e) === "Space") {
+        userInputDiv.textContent += " "; // Add a space
+    } else if (whichKey(e) === "Backspace") {
+        let currentText = userInputDiv.textContent;
+        userInputDiv.textContent = currentText.slice(0, -1); // Remove the last character
+    } else if (whichKey(e).length === 1) {  // Ignore special keys and handle normal characters
+        userInputDiv.textContent += whichKey(e);
     }
-    
-},false)
+}, false);
