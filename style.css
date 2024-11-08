@@ -12,14 +12,6 @@
     pointer-events: none; /* Prevents interaction with this text */
 }
 
-#user-input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: rgb(255, 255, 255); /* Visible text color */
-    z-index: 1; /* Ensures it appears above the target text */
-}
-
 body{
     background-color: black;
 }

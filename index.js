@@ -1,6 +1,5 @@
 let userInputText = "";
 
-
 function whichKey(e) {
     // Check if the key is a special key
     const specialKeys = {
@@ -35,32 +34,28 @@ function whichKey(e) {
     return '';
 }
 
-
-function checkCorrect(){
+function checkCorrect() {
     let input = userInputText;
     let text = document.getElementById('target-text').textContent;
     let current_length = input.length;
     let output = "";
 
+    // Compare input with the target text character by character
     for (let i = 0; i < current_length; i++) {
-        if (input[i] != text[i]) {
-            //console.log("Wrong at: " + i);
-            output += `<span style="color: red">${text[i]}</span>`;
+        if (input[i] !== text[i]) {
+            output += `<span style="color: red">${input[i]}</span>`;  // Incorrect character in red
         } else {
-            //console.log("Correct at: " + i);
-            output += `<span style="color: green">${text[i]}</span>`;
+            output += `<span style="color: green">${input[i]}</span>`;  // Correct character in green
         }
     }
     
-        // Update the user input div with the new HTML content
+    // Update the target text div with color-coded feedback
     document.getElementById('target-text').innerHTML = output;
 }
 
-
-
 window.addEventListener('keydown', function(e) {
     if (whichKey(e) === "Space") {
-        userInputText  += " "; // Add a space
+        userInputText += " "; // Add a space
     } else if (whichKey(e) === "Backspace") {
         userInputText = userInputText.slice(0, -1); // Remove the last character
     } else if (whichKey(e).length === 1) {  // Ignore special keys and handle normal characters
@@ -70,4 +65,3 @@ window.addEventListener('keydown', function(e) {
     console.log(userInputText);
     checkCorrect();
 }, false);
-
