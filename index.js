@@ -43,15 +43,15 @@ function checkCorrect(){
         if (input[i] !== text[i]) {
             console.log("Wrong at position: " + i);
             // Wrap the incorrect character in a span and apply a red color
-            output += `<span style="color: red">${input[i]}</span>`;
+            output += `<span style="color: red">${text[i]}</span>`;
         } else {
             // If the character is correct, simply add it to the output
-            output += `<span style="color: green">${input[i]}</span>`;
+            output += `<span style="color: green">${text[i]}</span>`;
         }
     }
     
     // Update the user input div with the new HTML content
-    document.getElementById('user-input').innerHTML = output;
+    document.getElementById('target-text').innerHTML = output;
 }
 
 
