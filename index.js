@@ -44,10 +44,10 @@ function checkCorrect(){
 
     for (let i = 0; i < current_length; i++) {
         if (input[i] != text[i]) {
-            console.log("Wrong at: " + i);
+            //console.log("Wrong at: " + i);
             output += `<span style="color: red">${text[i]}</span>`;
         } else {
-            console.log("Correct at: " + i);
+            //console.log("Correct at: " + i);
             output += `<span style="color: green">${text[i]}</span>`;
         }
     }
@@ -67,6 +67,7 @@ window.addEventListener('keydown', function(e) {
         userInputText += whichKey(e);
     }
 
+    console.log(userInputText);
     checkCorrect();
 }, false);
 
