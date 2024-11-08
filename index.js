@@ -31,7 +31,9 @@ window.addEventListener('keydown',function(e){
         document.getElementById('keydown').innerText += " ";
         console.log("Should put space");
     }else if(whichKey(e) == "Backspace"){
-        
+        let currentText = document.getElementById('keydown').innerText;
+        document.getElementById('keydown').innerText = currentText.slice(0, -1); // Remove last character
+        console.log("Backspace pressed, removed last character");
     }else{
         document.getElementById('keydown').innerText += whichKey(e);
     }
