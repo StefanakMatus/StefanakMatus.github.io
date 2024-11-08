@@ -42,15 +42,15 @@ function checkCorrect(){
     for (let i = 0; i < current_length; i++) {
         if (input[i] != text[i]) {
             console.log("Wrong at: " + i);
-            output += `<span style="color: red">${input[i]}</span>`;
+            output += `<span style="color: red">${text[i]}</span>`;
         } else {
             console.log("Correct at: " + i);
-            output += `<span style="color: green">${input[i]}</span>`;
+            output += `<span style="color: green">${text[i]}</span>`;
         }
     }
     
         // Update the user input div with the new HTML content
-    document.getElementById('user-input').innerHTML = output;
+    document.getElementById('target-text').innerHTML = output;
 }
 
 
