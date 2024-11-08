@@ -1,6 +1,5 @@
-function whichKey(e){
-    let charCode = e.keyCode
-    console.log(charCode);
+function whichKey(e) {
+    // Check if the key is a special key
     const specialKeys = {
         8: "Backspace",
         9: "Tab",
@@ -16,10 +15,21 @@ function whichKey(e){
         40: "Arrow Down"
     };
 
-    if (specialKeys[charCode]) {
-        return specialKeys[charCode];
+    // Check if key is a special key and return its name
+    if (specialKeys[e.keyCode]) {
+        return specialKeys[e.keyCode];
     }
-    return String.fromCharCode(charCode); 
+
+    // Handle normal keys, including Shift/CapsLock
+    if (e.key.length === 1) {  // Only handle normal characters (not special keys like "Backspace")
+        if (e.shiftKey || (e.key >= 'A' && e.key <= 'Z')) {
+            return e.key;  // Return the character typed, considering Shift/CapsLock
+        } else {
+            return e.key.toLowerCase();  // Return lowercase version if no Shift/CapsLock
+        }
+    }
+
+    return '';
 }
 
 
