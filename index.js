@@ -1,6 +1,6 @@
 function whichKey(e){
     let charCode = e.keyCode
-
+    console.log(charCode);
     const specialKeys = {
         8: "Backspace",
         9: "Tab",
@@ -24,7 +24,7 @@ function whichKey(e){
 
 
 window.addEventListener('keydown', function(e) {
-    console.log("keydown: " + whichKey(e));
+    //console.log("keydown: " + whichKey(e));
 
     const userInputDiv = document.getElementById('user-input');
 

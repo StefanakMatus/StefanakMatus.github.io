@@ -1,0 +1,21 @@
+#container {
+    position: relative;
+    font-family: monospace; /* Optional: makes it look like a typing field */
+    white-space: pre-wrap; /* Ensures spaces are properly displayed */
+}
+
+#target-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #ccc; /* Low visibility color */
+    pointer-events: none; /* Prevents interaction with this text */
+}
+
+#user-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: black; /* Visible text color */
+    z-index: 1; /* Ensures it appears above the target text */
+}
