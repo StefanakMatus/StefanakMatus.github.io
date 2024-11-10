@@ -40,10 +40,27 @@ function checkCorrect(input) {
     let counter = 0;
     let output = "";
 
-    console.log(text.length);
+
+    console.log("Sentence length: " + text.length);
+    console.log("Input length: " + current_length);
+
+    if(current_length > text.length){
+        console.log("Should be end of the string. DOnt allowe me to take another input");
+        return;
+    }
+
 
     // Compare input with the target text character by character
     for (let i = 0; i < current_length; i++) {
+        console.log("i: " + i);
+        if(i == current_length-1){
+            //set cursors on actuall position where
+            output += `<span style="background-color: blue">${text[i]}</span>`;  
+        }else{
+            //make it default
+            output += `<span style="background-color: black">${text[i]}</span>`;  
+        }
+
         if (input[i] == text[i]) {
             output += `<span style="color: green">${text[i]}</span>`;  // Correct character in green
             counter++;
@@ -53,7 +70,6 @@ function checkCorrect(input) {
     }
 
     if(counter === text.length){
-        console.log("enderino");
         // Load the next sentence here
         let newSentence = "This is the next sentence to type."; // Replace with your desired sentence
         document.getElementById('target-text').textContent = newSentence;
@@ -63,21 +79,18 @@ function checkCorrect(input) {
         return;
     }
     // Add the remaining untyped text from the target text in the original color
-    if (current_length < text.length) {
+    if (current_length <= text.length) {
         output += text.slice(current_length); 
         document.getElementById('target-text').innerHTML = output;
     }
-    
-    // Update the target text div with color-coded feedback
-    
 }
 
 window.addEventListener('keydown', function(e) {
-    if (whichKey(e) === "Space") {
+    if (whichKey(e) === "Space" && (userInputText.length <document.getElementById('target-text').textContent.length)) {
         userInputText += " "; // Add a space
     } else if (whichKey(e) === "Backspace") {
         userInputText = userInputText.slice(0, -1); // Remove the last character
-    } else if (whichKey(e).length === 1) {  // Ignore special keys and handle normal characters
+    } else if (whichKey(e).length === 1  && (userInputText.length <document.getElementById('target-text').textContent.length)) {  // Ignore special keys and handle normal characters
         userInputText += whichKey(e);
     }
 
