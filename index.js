@@ -65,10 +65,11 @@ function checkCorrect(input) {
     // Add the remaining untyped text from the target text in the original color
     if (current_length < text.length) {
         output += text.slice(current_length); 
+        document.getElementById('target-text').innerHTML = output;
     }
-
+    
     // Update the target text div with color-coded feedback
-    document.getElementById('target-text').innerHTML = output;
+    
 }
 
 window.addEventListener('keydown', function(e) {
