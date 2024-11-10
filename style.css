@@ -10,8 +10,35 @@
     left: 0;
     color: #838383; /* Low visibility color */
     pointer-events: none; /* Prevents interaction with this text */
+    font-size: 38px;
 }
 
-body{
+body {
     background-color: black;
+}
+
+h1 {
+    color:white;
+}
+/* Blinking cursor style */
+.blinking-cursor {
+    display: inline-block;
+    width: 2px;
+    background-color: black;
+    animation: blink 1s step-end infinite;
+}
+
+#counter {
+    color: red;
+    position: absolute;
+    top: 10px; /* Adjust top as needed */
+    left: 50%;
+    transform: translateX(-50%); /* Centers horizontally */
+}
+
+/* Keyframes for the blinking effect */
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
 }
