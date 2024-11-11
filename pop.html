@@ -5,6 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Results</title>
     
+    <style>
+        /* Basic reset for margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        /* Popup container */
+        #result_container {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1.1em;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        /* Zebra stripe for rows */
+        tr:nth-child(even) td {
+            background-color: #f1f1f1;
+        }
+
+        /* Hover effect for table rows */
+        tr:hover td {
+            background-color: #e1f5e1;
+            cursor: pointer;
+        }
+
+        /* Header styling */
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+    </style>
+
     <script>
         // Listen for messages from the main window
         window.addEventListener('message', (event) => {
@@ -12,39 +85,39 @@
             console.log(performanceData);
 
             if (performanceData && performanceData.length > 0) {
-                //get container
+                // Get container
                 const resultsDiv = document.getElementById('result_container');
-                resultsDiv.innerHTML = ''; //clear previous
+                resultsDiv.innerHTML = ''; // Clear previous content
 
-                //create new table
+                // Create new table
                 const tableWithData = document.createElement("table");
-                //create header space for table
+
+                // Create header space for table
                 const header = document.createElement("tr");
                 
-                //specific headers
+                // Specific headers
                 const level_H = document.createElement("th");
-                const mistakes_H = document.createElement("th")
-                const time_H = document.createElement("th")
+                const mistakes_H = document.createElement("th");
+                const time_H = document.createElement("th");
 
-                //specific headers naming
+                // Specific headers naming
                 level_H.textContent = "LEVEL";
                 mistakes_H.textContent = "MISTAKES";
                 time_H.textContent = "TIME";
 
-                //append headers to the header
+                // Append headers to the header row
                 header.appendChild(level_H);
                 header.appendChild(mistakes_H);
                 header.appendChild(time_H);
 
-                //add header to the table
+                // Add header row to the table
                 tableWithData.appendChild(header);
 
                 resultsDiv.appendChild(tableWithData);
 
-                for(let i = 0; i <= performanceData.length; i++){
-                    console.log(performanceData[i]);
-
-                    const RowOfData = document.createElement("tr");
+                // Populate table with data
+                for (let i = 0; i < performanceData.length; i++) {
+                    const rowOfData = document.createElement("tr");
 
                     // Create text content for each data point
                     const levelText = document.createElement("td");
@@ -57,14 +130,13 @@
                     timeText.textContent = performanceData[i].time;
 
                     // Append the text elements to the table row
-                    RowOfData.appendChild(levelText);
-                    RowOfData.appendChild(mistakesText);
-                    RowOfData.appendChild(timeText);
+                    rowOfData.appendChild(levelText);
+                    rowOfData.appendChild(mistakesText);
+                    rowOfData.appendChild(timeText);
                     
                     // Append the new whole row to the table
-                    tableWithData.appendChild(RowOfData);
+                    tableWithData.appendChild(rowOfData);
                 }
-
             }
         });
     </script>
@@ -72,9 +144,6 @@
 </head>
 <body>
     <h1>Results</h1>
-    <div id="result_container">
-    </div>
-
-    
+    <div id="result_container"></div>
 </body>
 </html>
