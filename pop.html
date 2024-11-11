@@ -11,9 +11,25 @@
             const performanceData = event.data;
 
             if (performanceData && performanceData.length > 0) {
+                for(let i = 0; i < performanceData.length; i++){
+                    resuls_div = document.getElementById('result_container');
+                    
+                    const newDiv = document.createElement("div");
+                    const level = performanceData[i].level;
+                    const mistakes = performanceData[i].mistakes;
+                    const time = performanceData[i].time;
+
+                    newDiv.appendChild(level);
+                    newDiv.appendChild(mistakes);
+                    newDiv.appendChild(time);
+
+                    resuls_div.appendChild(newDiv);
+                }
+                /*
                 document.getElementById('level-text').textContent = `Level: ${performanceData[0].level}`;
                 document.getElementById('mistakes-text').textContent = `Mistakes: ${performanceData[0].mistakes}`;
                 document.getElementById('time-text').textContent = `Time: ${performanceData[0].time} seconds`;
+                */
             }
         });
     </script>
@@ -21,7 +37,7 @@
 </head>
 <body>
     <h1>Results</h1>
-    <div id="pop_container">
+    <div id="result_container">
         <div id="level-text">Level</div>
         <div id="mistakes-text">Mistakes</div>
         <div id="time-text">Timer</div>
