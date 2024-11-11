@@ -153,13 +153,6 @@ function loadNextSentence() {
 }
 
 function showresults() {
-    if(newPopUpWindow){
-        console.log("PopUp already exists");
-        console.log("PopUp already exists");
-        console.log("PopUp already exists");
-        console.log("PopUp already exists");
-        console.log("PopUp already exists");
-    }
     // Open a new popup window
     const newPopUpWindow = window.open('./pop.html', 'name', 'width=700,height=350');
 
