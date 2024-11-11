@@ -13,10 +13,10 @@
             if (performanceData && performanceData.length > 0) {
                 //get container
                 const resultsDiv = document.getElementById('result_container');
-                resultsDiv.innerHTML = ''; //clear previous
+                //resultsDiv.innerHTML = ''; //clear previous
 
                 //create new table
-                const newTable = document.createElement("table");
+                const tableWithData = document.createElement("table");
                 //create header space for table
                 const header = document.createElement("tr");
                 
@@ -36,12 +36,12 @@
                 header.appendChild(time_H);
 
                 //add header to the table
-                newTable.appendChild(header);
+                tableWithData.appendChild(header);
 
-                resultsDiv.appendChild(newTable);
+                resultsDiv.appendChild(tableWithData);
 
                 for(let i = 0; i <= performanceData.length; i++){
-                    const newTableRow = document.createElement("tr");
+                    const RowOfData = document.createElement("tr");
 
                     // Create text content for each data point
                     const levelText = document.createElement("td");
@@ -54,12 +54,12 @@
                     timeText.textContent = performanceData[i].time;
 
                     // Append the text elements to the table row
-                    newTableRow.appendChild(levelText);
-                    newTableRow.appendChild(mistakesText);
-                    newTableRow.appendChild(timeText);
+                    RowOfData.appendChild(levelText);
+                    RowOfData.appendChild(mistakesText);
+                    RowOfData.appendChild(timeText);
                     
                     // Append the new whole row to the table
-                    newTable.appendChild(newTableRow);
+                    tableWithData.appendChild(RowOfData);
                 }
 
             }
