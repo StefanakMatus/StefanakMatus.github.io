@@ -38,6 +38,7 @@
                 //add header to the table
                 newTable.appendChild(header);
 
+                resultsDiv.appendChild(newTable);
 
                 for(let i = 0; i <= performanceData.length; i++){
                     const newTableRow = document.createElement("tr");
@@ -61,8 +62,6 @@
                     newTable.appendChild(newTableRow);
                 }
 
-                //add the whole edited table to the div
-                resultsDiv.appendChild(newTable);
             }
         });
     </script>
