@@ -57,12 +57,11 @@
                     newTableRow.appendChild(mistakesText);
                     newTableRow.appendChild(timeText);
                     
-                    // Append the new row to the table
-
+                    // Append the new whole row to the table
                     newTable.appendChild(newTableRow);
                 }
 
-
+                //add the whole edited table to the div
                 resultsDiv.appendChild(newTable);
             }
         });
@@ -72,9 +71,6 @@
 <body>
     <h1>Results</h1>
     <div id="result_container">
-        <div id="level-text">Level</div>
-        <div id="mistakes-text">Mistakes</div>
-        <div id="time-text">Timer</div>
     </div>
 
     
