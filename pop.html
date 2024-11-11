@@ -9,11 +9,12 @@
         // Listen for messages from the main window
         window.addEventListener('message', (event) => {
             const performanceData = event.data;
+            console.log(performanceData);
 
             if (performanceData && performanceData.length > 0) {
                 //get container
                 const resultsDiv = document.getElementById('result_container');
-                //resultsDiv.innerHTML = ''; //clear previous
+                resultsDiv.innerHTML = ''; //clear previous
 
                 //create new table
                 const tableWithData = document.createElement("table");
@@ -41,6 +42,8 @@
                 resultsDiv.appendChild(tableWithData);
 
                 for(let i = 0; i <= performanceData.length; i++){
+                    console.log(performanceData[i]);
+
                     const RowOfData = document.createElement("tr");
 
                     // Create text content for each data point
