@@ -199,14 +199,18 @@ window.addEventListener('keydown', function(e) {
     updateDisplay(userInputText, targetText);
 }, false);
 
-// Initialize display on page load
 document.addEventListener('DOMContentLoaded', () => {
     userInputText = "";
-    initialText = "game.";
+    const initialText = "game.";
 
-    if (popUpWindow && !popUpWindow.closed) {
-        // If the window is open, close it
-        popUpWindow.close();
+    // Close the pop-up window if it's already open
+    let popUpWindow = window.sessionStorage.getItem('popUpWindow');
+    if (popUpWindow) {
+        popUpWindow = JSON.parse(popUpWindow);
+        if (popUpWindow && !popUpWindow.closed) {
+            popUpWindow.close();
+        }
     }
+
     updateDisplay(userInputText, initialText);
 });
