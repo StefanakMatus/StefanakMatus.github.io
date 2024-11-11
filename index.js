@@ -124,14 +124,14 @@ function pushPerformance(){
 function loadNextSentence() {
     // If all sentences are completed, stop the function
     if (sentenceCounter === sentences.length) {
-        console.log("KONEC");
         pushPerformance();
         showresults();
         return;
     }
 
-
+    //othwerwise just store the data and load the new sentence
     pushPerformance();
+
     // Get the next sentence
     const newSentence = sentences[sentenceCounter];
     sentenceCounter++;
@@ -149,11 +149,20 @@ function loadNextSentence() {
     mistakes = 0;  // Reset the mistakes counter for the new sentence
 }
 
-function showresults() {
-    const popUpWindow = window.open('./pop.html', 'name', 'width=700,height=350');
+let popUpWindow = null;
 
+function showresults() {
+    // Check if the popup window is already open
+    if (popUpWindow && !popUpWindow.closed) {
+        // If the window is open, close it
+        popUpWindow.close();
+    }
+
+    // Open a new popup window
+    popUpWindow = window.open('./pop.html', 'name', 'width=700,height=350');
+
+    // Ensure the window is fully loaded before sending the message
     popUpWindow.addEventListener('load', () => {
-        // Make sure the window is fully loaded before sending the message
         popUpWindow.postMessage(performanceData, '*');  // Adjust the origin as necessary
     });
 }
