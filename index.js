@@ -151,11 +151,11 @@ function loadNextSentence() {
 
 function showresults() {
     const popUpWindow = window.open('./pop.html', 'name', 'width=700,height=350');
+    popUpWindow.focus();
 
     document.getElementById('level-text').textContent = `Level ${performanceData[0].level}`;
     document.getElementById('mistakes-text').textContent = `Mistakes ${performanceData[0].mistakes}`;
     document.getElementById('time-text').textContent = `Time ${performanceData[0].time}`;
-    popUpWindow.focus();
 }
 
 
