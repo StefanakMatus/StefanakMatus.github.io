@@ -12,30 +12,48 @@
 
             if (performanceData && performanceData.length > 0) {
                 const resultsDiv = document.getElementById('result_container');
-                
-                // Clear the container first (optional, if you want to reset the list)
                 resultsDiv.innerHTML = '';
 
+                const newTable = document.createElement("table");
+
+                const header = document.createElement("tr");
+                
+                const level_H = document.createElement("th");
+                const mistakes_H = document.createElement("th")
+                const time_H = document.createElement("th")
+
+                level_H.textContent = "LEVEL";
+                mistakes_H.textContent = "MISTAKES";
+                time_H.textContent = "TIME";
+
+                header.appendChild(level_H);
+                header.appendChild(mistakes_H);
+                header.appendChild(time_H);
+
+                newTable.appendChild(header);
+
+                resultsDiv.appendChild(newTable);
+
                 for(let i = 0; i <= performanceData.length; i++){
-                    const newDiv = document.createElement("div");
+                    const newTableRow = document.createElement("tr");
 
                     // Create text content for each data point
-                    const levelText = document.createElement("p");
-                    levelText.textContent = `Level: ${performanceData[i].level}`;
+                    const levelText = document.createElement("td");
+                    levelText.textContent = performanceData[i].level;
                     
-                    const mistakesText = document.createElement("p");
-                    mistakesText.textContent = `Mistakes: ${performanceData[i].mistakes}`;
+                    const mistakesText = document.createElement("td");
+                    mistakesText.textContent = performanceData[i].mistakes;
+                
+                    const timeText = document.createElement("td");
+                    timeText.textContent = performanceData[i].time;
+
+                    // Append the text elements to the table row
+                    newTableRow.appendChild(levelText);
+                    newTableRow.appendChild(mistakesText);
+                    newTableRow.appendChild(timeText);
                     
-                    const timeText = document.createElement("p");
-                    timeText.textContent = `Time: ${performanceData[i].time} seconds`;
-
-                    // Append the text elements to the new div
-                    newDiv.appendChild(levelText);
-                    newDiv.appendChild(mistakesText);
-                    newDiv.appendChild(timeText);
-
-                    // Append the new div to the results container
-                    resultsDiv.appendChild(newDiv);
+                    // Append the new row to the table
+                    resultsDiv.appendChild(newTableRow);
                 }
             }
         });

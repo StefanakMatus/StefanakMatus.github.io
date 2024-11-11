@@ -152,9 +152,10 @@ function loadNextSentence() {
 function showresults() {
     const popUpWindow = window.open('./pop.html', 'name', 'width=700,height=350');
 
-    popUpWindow.onload = () => {
-        popUpWindow.postMessage(performanceData, '*');
-    };
+    popUpWindow.addEventListener('load', () => {
+        // Make sure the window is fully loaded before sending the message
+        popUpWindow.postMessage(performanceData, '*');  // Adjust the origin as necessary
+    });
 }
 
 
