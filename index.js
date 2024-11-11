@@ -2,6 +2,11 @@ let userInputText = "";
 let sentenceCounter = 0;
 let mistakes = 0;
 
+let timerInterval = null;
+let seconds = 0;  // Timer counter to track time elapsed
+
+let performanceData = [];
+
 const specialKeys = {
     "Backspace": "Backspace",
     "Tab": "Tab",
@@ -51,19 +56,22 @@ function updateDisplay(input, target) {
                 outputHTML += `<span style="color: green">${target[i]}</span>`; // Correct character
                 correctChars++;
             } else {
-                //mistake on space
-                if (target[i] === " "){
-                    outputHTML += `<span style="background-color: red">${target[i]}</span>`; // Incorrect character
-                }else{
+                // Mistake on space or character
+                if (target[i] === " ") {
+                    outputHTML += `<span style="background-color: red">${target[i]}</span>`; // Incorrect space
+                } else {
                     outputHTML += `<span style="color: red">${target[i]}</span>`; // Incorrect character
                 }
-                mistakes++;
+                // Count mistakes only once per character
+                if (input[i] !== target[i]) {
+                    mistakes++;
+                }
             }
         } else {
             // Add the current character with a background color when typing
             if (i === input.length) {
                 outputHTML += `<span style="background-color: yellow">${target[i]}</span>`;
-            }else{
+            } else {
                 outputHTML += `<span>${target[i]}</span>`; // Remaining text
             }
         }
@@ -77,23 +85,52 @@ function updateDisplay(input, target) {
     // Check if typing is complete
     if (correctChars === target.length) {
         console.log("Loading new sentence");
-        console.log("Mistkes made: " + mistakes);
+        console.log("Mistakes made: " + mistakes);
         loadNextSentence();
     }
 }
 
 
-// Load the next sentence and reset input
+let startTime = null;  // To track the start time of each sentence
+
 function loadNextSentence() {
+    // If all sentences are completed, stop the function
+    if (sentenceCounter === sentences.length) {
+        console.log("KONEC");
+        return;
+    }
+
+    // If a sentence was completed, log the time taken to type it
+    if (startTime !== null) {
+        const endTime = new Date();  // Capture the end time
+        const timeTaken = (endTime - startTime) / 1000;  // Time in seconds
+        console.log(`Time taken for ${sentenceCounter} sentence was ${timeTaken} seconds. Mistakes made ${mistakes}`);
+        
+        // Store the performance data with descriptive object keys
+        performanceData.push({
+            level: sentenceCounter,
+            time: timeTaken,
+            mistakes: mistakes
+        });
+    }
+
+    // Get the next sentence
     const newSentence = sentences[sentenceCounter];
     sentenceCounter++;
+
+    // Update the target text and reset user input
     document.getElementById('target-text').textContent = newSentence;
     userInputText = "";  // Reset user input
     updateDisplay(userInputText, newSentence);
 
-    //update "score"
-    document.getElementById('counter').textContent = sentenceCounter + "/ " + sentences.length;
+    // Update the counter displaying the current sentence index
+    document.getElementById('counter').textContent = `${sentenceCounter} / ${sentences.length}`;
+
+    // Start the timer for the new sentence
+    startTime = new Date();  // Record the start time for the new sentence
+    mistakes = 0;  // Reset the mistakes counter for the new sentence
 }
+
 
 
 // Handle key events and check for correctness
@@ -122,5 +159,6 @@ window.addEventListener('keydown', function(e) {
 document.addEventListener('DOMContentLoaded', () => {
     userInputText = "";
     initialText = "game.";
+
     updateDisplay(userInputText, initialText);
 });
