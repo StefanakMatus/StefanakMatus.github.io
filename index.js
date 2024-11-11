@@ -1,11 +1,16 @@
 let userInputText = "";
 let sentenceCounter = 0;
-let mistakes = 0;
 
+
+// data of typing
+let performanceData = [];   
+let mistakes = 0;
 let timerInterval = null;
+let startTime = null;  // To track the start time of each sentence
 let seconds = 0;
 
-let performanceData = [];
+// Track the previous input length
+let previousInputLength = 0;  
 
 const specialKeys = {
     "Backspace": "Backspace",
@@ -49,7 +54,6 @@ const sentences = [
 ];
 */
 
-let previousInputLength = 0;  // Track the previous input length
 
 function updateDisplay(input, target) {
     let outputHTML = "";
@@ -102,7 +106,6 @@ function updateDisplay(input, target) {
 
 
 
-let startTime = null;  // To track the start time of each sentence
 
 function pushPerformance(){
     // If a sentence was completed, log the time taken to type it
@@ -150,26 +153,10 @@ function loadNextSentence() {
 }
 
 function showresults() {
-    // Check if there's already a reference to the open popup in sessionStorage
-    let popUpWindow = window.sessionStorage.getItem('popUpWindow');
-
-    // If popUpWindow is not null and it's still open, use the existing window
-    if (popUpWindow && !window[popUpWindow].closed) {
-        // If the window is open, close it
-        window[popUpWindow].close();
-    }
 
     // Open a new popup window
     const newPopUpWindow = window.open('./pop.html', 'name', 'width=700,height=350');
 
-    // Store the reference in sessionStorage using a unique name
-    const uniquePopUpId = 'popUpWindow';
-    window.sessionStorage.setItem(uniquePopUpId, 'newPopUpWindow');
-    
-    // Update the global variable to refer to the new popup window
-    window[uniquePopUpId] = newPopUpWindow;
-
-    // Ensure the window is fully loaded before sending the message
     newPopUpWindow.addEventListener('load', () => {
         newPopUpWindow.postMessage(performanceData, '*');  // Adjust the origin as necessary
     });
@@ -202,15 +189,5 @@ window.addEventListener('keydown', function(e) {
 document.addEventListener('DOMContentLoaded', () => {
     userInputText = "";
     const initialText = "game.";
-
-    // Close the pop-up window if it's already open
-    let popUpWindow = window.sessionStorage.getItem('popUpWindow');
-    if (popUpWindow) {
-        popUpWindow = JSON.parse(popUpWindow);
-        if (popUpWindow && !popUpWindow.closed) {
-            popUpWindow.close();
-        }
-    }
-
     updateDisplay(userInputText, initialText);
 });
