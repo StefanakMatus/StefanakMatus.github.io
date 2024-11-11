@@ -149,20 +149,32 @@ function loadNextSentence() {
     mistakes = 0;  // Reset the mistakes counter for the new sentence
 }
 
-let popUpWindow = null;
-
 function showresults() {
-    // Check if the popup window is already open
+    // Check if there's already a reference to the open popup in sessionStorage
+    let popUpWindow = window.sessionStorage.getItem('popUpWindow');
 
+    // If popUpWindow is not null and it's still open, use the existing window
+    if (popUpWindow && !window[popUpWindow].closed) {
+        // If the window is open, close it
+        window[popUpWindow].close();
+    }
 
     // Open a new popup window
-    popUpWindow = window.open('./pop.html', 'name', 'width=700,height=350');
+    const newPopUpWindow = window.open('./pop.html', 'name', 'width=700,height=350');
+
+    // Store the reference in sessionStorage using a unique name
+    const uniquePopUpId = 'popUpWindow';
+    window.sessionStorage.setItem(uniquePopUpId, 'newPopUpWindow');
+    
+    // Update the global variable to refer to the new popup window
+    window[uniquePopUpId] = newPopUpWindow;
 
     // Ensure the window is fully loaded before sending the message
-    popUpWindow.addEventListener('load', () => {
-        popUpWindow.postMessage(performanceData, '*');  // Adjust the origin as necessary
+    newPopUpWindow.addEventListener('load', () => {
+        newPopUpWindow.postMessage(performanceData, '*');  // Adjust the origin as necessary
     });
 }
+
 
 
 
