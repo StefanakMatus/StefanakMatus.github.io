@@ -3,7 +3,7 @@ let sentenceCounter = 0;
 let mistakes = 0;
 
 let timerInterval = null;
-let seconds = 0;  // Timer counter to track time elapsed
+let seconds = 0;
 
 let performanceData = [];
 
@@ -24,7 +24,10 @@ const specialKeys = {
 
 const sentences = [
     "The quick brown fox jumps over the lazy dog.",
-    "She sells seashells by the seashore.",
+    "She sells seashells by the seashore."
+];
+/*
+    ,
     "How much wood would a woodchuck chuck if a woodchuck could chuck wood?",
     "A journey of a thousand miles begins with a single step.",
     "To be or not to be, that is the question.",
@@ -44,11 +47,14 @@ const sentences = [
     "The pen is mightier than the sword.",
     "Honesty is the best policy."
 ];
+*/
+
+let previousInputLength = 0;  // Track the previous input length
 
 function updateDisplay(input, target) {
     let outputHTML = "";
     let correctChars = 0;
-    
+
     // Iterate through the user input and target text
     for (let i = 0; i < target.length; i++) {
         if (i < input.length) {
@@ -62,8 +68,9 @@ function updateDisplay(input, target) {
                 } else {
                     outputHTML += `<span style="color: red">${target[i]}</span>`; // Incorrect character
                 }
-                // Count mistakes only once per character
-                if (input[i] !== target[i]) {
+
+                // Only increment mistakes if a new character was added (not removed with Backspace)
+                if (input.length - 1 === i && input.length > previousInputLength && input[i] !== target[i]) {
                     mistakes++;
                 }
             }
@@ -82,6 +89,9 @@ function updateDisplay(input, target) {
 
     document.getElementById('target-text').innerHTML = outputHTML;
 
+    // Update previous input length to the current length
+    previousInputLength = input.length;
+
     // Check if typing is complete
     if (correctChars === target.length) {
         console.log("Loading new sentence");
@@ -91,15 +101,10 @@ function updateDisplay(input, target) {
 }
 
 
+
 let startTime = null;  // To track the start time of each sentence
 
-function loadNextSentence() {
-    // If all sentences are completed, stop the function
-    if (sentenceCounter === sentences.length) {
-        console.log("KONEC");
-        return;
-    }
-
+function pushPerformance(){
     // If a sentence was completed, log the time taken to type it
     if (startTime !== null) {
         const endTime = new Date();  // Capture the end time
@@ -112,8 +117,21 @@ function loadNextSentence() {
             time: timeTaken,
             mistakes: mistakes
         });
+        mistakes = 0;
+    }
+}
+
+function loadNextSentence() {
+    // If all sentences are completed, stop the function
+    if (sentenceCounter === sentences.length) {
+        console.log("KONEC");
+        pushPerformance();
+        showresults();
+        return;
     }
 
+
+    pushPerformance();
     // Get the next sentence
     const newSentence = sentences[sentenceCounter];
     sentenceCounter++;
@@ -129,6 +147,14 @@ function loadNextSentence() {
     // Start the timer for the new sentence
     startTime = new Date();  // Record the start time for the new sentence
     mistakes = 0;  // Reset the mistakes counter for the new sentence
+}
+
+function showresults() {
+    const popUpWindow = window.open('./pop.html', 'name', 'width=700,height=350');
+
+    popUpWindow.onload = () => {
+        popUpWindow.postMessage({ performanceData }, '*');
+    };
 }
 
 
@@ -153,7 +179,6 @@ window.addEventListener('keydown', function(e) {
 
     updateDisplay(userInputText, targetText);
 }, false);
-
 
 // Initialize display on page load
 document.addEventListener('DOMContentLoaded', () => {
