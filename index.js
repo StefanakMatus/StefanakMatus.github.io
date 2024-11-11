@@ -153,10 +153,7 @@ let popUpWindow = null;
 
 function showresults() {
     // Check if the popup window is already open
-    if (popUpWindow && !popUpWindow.closed) {
-        // If the window is open, close it
-        popUpWindow.close();
-    }
+
 
     // Open a new popup window
     popUpWindow = window.open('./pop.html', 'name', 'width=700,height=350');
@@ -195,5 +192,9 @@ document.addEventListener('DOMContentLoaded', () => {
     userInputText = "";
     initialText = "game.";
 
+    if (popUpWindow && !popUpWindow.closed) {
+        // If the window is open, close it
+        popUpWindow.close();
+    }
     updateDisplay(userInputText, initialText);
 });
