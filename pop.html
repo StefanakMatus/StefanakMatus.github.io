@@ -11,28 +11,33 @@
             const performanceData = event.data;
 
             if (performanceData && performanceData.length > 0) {
+                //get container
                 const resultsDiv = document.getElementById('result_container');
-                resultsDiv.innerHTML = '';
+                resultsDiv.innerHTML = ''; //clear previous
 
+                //create new table
                 const newTable = document.createElement("table");
-
+                //create header space for table
                 const header = document.createElement("tr");
                 
+                //specific headers
                 const level_H = document.createElement("th");
                 const mistakes_H = document.createElement("th")
                 const time_H = document.createElement("th")
 
+                //specific headers naming
                 level_H.textContent = "LEVEL";
                 mistakes_H.textContent = "MISTAKES";
                 time_H.textContent = "TIME";
 
+                //append headers to the header
                 header.appendChild(level_H);
                 header.appendChild(mistakes_H);
                 header.appendChild(time_H);
 
+                //add header to the table
                 newTable.appendChild(header);
 
-                resultsDiv.appendChild(newTable);
 
                 for(let i = 0; i <= performanceData.length; i++){
                     const newTableRow = document.createElement("tr");
@@ -53,8 +58,12 @@
                     newTableRow.appendChild(timeText);
                     
                     // Append the new row to the table
-                    resultsDiv.appendChild(newTableRow);
+
+                    newTable.appendChild(newTableRow);
                 }
+
+
+                resultsDiv.appendChild(newTable);
             }
         });
     </script>
